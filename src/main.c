@@ -35,8 +35,31 @@ void mt_draw(MakiseGUI * g)
     sprintf(bu, "x: %d, y%d", x, y);
     makise_d_string(mGui->buffer, bu, 100, 400, 400, MDTextPlacement_LeftUp, &F_Arial12, MC_Cyan);
 
+    at_list_u();
 //    makise_g_host_call(host, M_G_CALL_DRAW);
 }
+
+MInputData inp_handler(MInputData d, MInputResultEnum res)
+{
+    if(d.event == M_INPUT_CLICK && res == M_INPUT_NOT_HANDLED)
+    {
+	if(d.key == M_KEY_LEFT)
+	    makise_g_host_focus_prev(host);
+	if(d.key == M_KEY_RIGHT)
+	    makise_g_host_focus_next(host);
+	if(d.key == M_KEY_UP)
+	    makise_g_host_focus_prev(host);
+	if(d.key == M_KEY_DOWN)
+	    makise_g_host_focus_next(host);
+	if(d.key == M_KEY_TAB_NEXT)
+	    makise_g_host_focus_next(host);
+	if(d.key == M_KEY_TAB_BACK)
+	    makise_g_host_focus_prev(host);		    
+
+    }
+    return (MInputData){0};
+}
+
 int main(void) {
     SDL_Event event;
     int i;
@@ -67,7 +90,7 @@ int main(void) {
 
 	
 	//SDL_Delay(6);
-	if(SDL_WaitEventTimeout(&event, 500))
+	if(SDL_WaitEventTimeout(&event, 50))
 	{
 	    do
 	    {
@@ -85,67 +108,46 @@ int main(void) {
 		    switch (event.key.keysym.sym)
 		    {
 		    case SDLK_LEFT:
-			if(makise_g_host_input
-			   (host,
-			    (MInputData){M_KEY_LEFT, M_INPUT_CLICK, 100, 0})
-			   == M_INPUT_NOT_HANDLED)
-			{
-			    makise_g_cont_focus_prev(host->host);
-			}
+			makise_gui_input_send_button(host,
+						     M_KEY_LEFT,
+						     M_INPUT_CLICK, 100);
 			break;
 		    case SDLK_RIGHT:
-			if(makise_g_host_input
-			   (host,
-			    (MInputData){M_KEY_RIGHT, M_INPUT_CLICK, 100, 0})
-			   == M_INPUT_NOT_HANDLED)
-			{
-			    makise_g_cont_focus_next(host->host);
-			}
+			makise_gui_input_send_button(host,
+						     M_KEY_RIGHT,
+						     M_INPUT_CLICK, 100);
 			break;
 		    case SDLK_UP:
-			if(makise_g_host_input
-			   (host,
-			    (MInputData){M_KEY_UP, M_INPUT_CLICK, 100, 0})
-			   == M_INPUT_NOT_HANDLED)
-			{
-			    makise_g_cont_focus_prev(host->host);
-			}
+			makise_gui_input_send_button(host,
+						     M_KEY_UP,
+						     M_INPUT_CLICK, 100);
 			break;
 		    case SDLK_DOWN:
-			if(makise_g_host_input
-			   (host,
-			    (MInputData){M_KEY_DOWN, M_INPUT_CLICK, 100, 0})
-			   == M_INPUT_NOT_HANDLED)
-			{
-			    makise_g_cont_focus_next(host->host);
-			}
+			makise_gui_input_send_button(host,
+						     M_KEY_DOWN,
+						     M_INPUT_CLICK, 100);
 			break;
 		    case SDLK_TAB:
-			if(makise_g_host_input
-			   (host,
-			    (MInputData){M_KEY_TAB_NEXT, M_INPUT_CLICK, 100, 0})
-			   == M_INPUT_NOT_HANDLED)
-			{
-			    makise_g_cont_focus_next(host->host);
-			}
+			makise_gui_input_send_button(host,
+						     M_KEY_TAB_NEXT,
+						     M_INPUT_CLICK, 100);
 			break;
 		    case SDLK_RETURN:
-			makise_g_host_input
-			    (host,
-			     (MInputData){M_KEY_OK, M_INPUT_CLICK, 100, 0});
-		      
+			makise_gui_input_send_button(host,
+						     M_KEY_OK,
+						     M_INPUT_CLICK, 100);	      
 			break;
 		    case SDLK_ESCAPE:
 			SDL_DestroyRenderer(renderer);
 			SDL_DestroyWindow(window);
 			SDL_Quit();
 			return EXIT_SUCCESS;
-		
 			break;
 		    }
 		}
 	    }
 	    while (SDL_PollEvent(&event));
+	    makise_gui_input_perform(host);
 	}
     }
 }
@@ -165,7 +167,9 @@ void start_m()
     host = &hs;//malloc(sizeof(MHost));
     host->host = &co;//malloc(sizeof(MContainer));
     host->host->gui = gu;
-
+    makise_gui_init(host);
+    host->input.result_handler = inp_handler;
+    
     //init driver structure
     makise_sdl2_driver(dr, 800, 600, screen);
     

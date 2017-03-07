@@ -9,6 +9,9 @@ MSList   list[3];
 MSlider  slider[3];
 MTabs tabs;
 
+MCanvas text_c[1];
+MLable  text_l[1];
+
 char* sample_string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 
@@ -148,6 +151,11 @@ void s_onchange(MSlider* b, uint32_t val)
 	    slider_val[1],
 	    slider_val[2]);
 }
+
+void at_list_u()
+{
+    text_l->el.position.x--;
+}
     
 void at_list_init(MakiseGUI *gui, MHost *host)
 {
@@ -196,7 +204,8 @@ void at_list_init(MakiseGUI *gui, MHost *host)
 		   slider_text,
 		   &lable_style);
 		   
-		   
+    m_create_canvas(text_c, &tabs_source[0].cont, 20, 20, 101, 51, &canvas_style);
+    m_create_lable(text_l, &text_c->cont, 0, 0, 10000, 50, sample_string, &button_style);
 
     for (uint32_t i = 0; i < 10; i++) {
 	//l_source[i].text = t_list[i];
