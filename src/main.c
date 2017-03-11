@@ -59,7 +59,7 @@ MInputData inp_handler(MInputData d, MInputResultEnum res)
     }
     return (MInputData){0};
 }
-
+uint8_t prsed = 0;
 int main(void) {
     SDL_Event event;
     int i;
@@ -96,6 +96,17 @@ int main(void) {
 	    {
 		x = event.motion.x;
 		y = event.motion.y;
+
+		if(prsed)
+		{
+		    MInputData d;
+		    d.event = M_INPUT_PRESSING;
+		    d.key = M_KEY_CURSOR;
+		    d.time = 100;
+		    d.cursor.x = x;
+		    d.cursor.y = y;
+		    makise_gui_input_send(host, d);
+		}
 		switch(event.type)
 		{
 		case SDL_QUIT:
@@ -103,6 +114,35 @@ int main(void) {
 		    SDL_DestroyWindow(window);
 		    SDL_Quit();
 		    return EXIT_SUCCESS;
+		    break;
+		case SDL_MOUSEBUTTONDOWN:
+		    if(event.button.button == SDL_BUTTON_LEFT)
+		    {
+			printf("down\n");
+			prsed = 1;
+			MInputData d;
+			d.event = M_INPUT_PRESSING;
+			d.key = M_KEY_CURSOR;
+			d.time = 100;
+			d.cursor.x = x;
+			d.cursor.y = y;
+			makise_gui_input_send(host, d);
+		    }
+		    break;
+		case SDL_MOUSEBUTTONUP:
+		    if(event.button.button == SDL_BUTTON_LEFT &&
+			prsed)
+		    {
+			printf("up\n");
+			prsed = 0;
+			MInputData d;
+			d.event = M_INPUT_CLICK;
+			d.key = M_KEY_CURSOR;
+			d.time = 100;
+			d.cursor.x = x;
+			d.cursor.y = y;
+			makise_gui_input_send(host, d);
+		    }
 		    break;
 		case SDL_KEYDOWN:
 		    switch (event.key.keysym.sym)
