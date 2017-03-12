@@ -12,6 +12,8 @@ MTabs tabs;
 MCanvas text_c[1];
 MLable  text_l[1];
 
+MHost *mHost;
+
 char* sample_string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 
@@ -103,7 +105,7 @@ MTabs_Tab tabs_source[] =
 uint32_t s_i = 0;
 void b_add(MButton *b)
 {
-    tabs.selected = 1;
+    m_tabs_select_tab(&tabs, 1);
     for (uint32_t i = 0; i < 10; i++) {
 	if(l_source[i].value)
 	{
@@ -117,7 +119,7 @@ void b_add(MButton *b)
 }
 void b_rem(MButton *b)
 {
-    tabs.selected = 2;
+    m_tabs_select_tab(&tabs, 1);
     MSList_Item *i = list[1].items, *n = 0;
     while (i != 0) {
 	n = i->next;
@@ -126,6 +128,10 @@ void b_rem(MButton *b)
 	    m_slist_remove(&list[1], i);
 	i = n;
     }
+}
+void b_tree(MButton *b)
+{
+    makise_g_print_tree(mHost);
 }
 void l_add(MSList *l, MSList_Item *i)
 {
@@ -159,6 +165,7 @@ void at_list_u()
     
 void at_list_init(MakiseGUI *gui, MHost *host)
 {
+    mHost = host;
 //    m_create_slist(&list[0], host->host, 3, 10, 156, 145, "lol", &l_onselection, &l_add, MSList_RadioButton, &canvas_style, &lable_style);
 
 //    m_create_slist(&list[1], host->host, 160, 10, 156, 145, 0, &l_onselection, &l_rem, MSList_Checkbox, &canvas_style, &lable_style);
@@ -166,11 +173,12 @@ void at_list_init(MakiseGUI *gui, MHost *host)
     m_create_tabs(&tabs, host->host,
 		  0, 10, 320, 200,
 		  tabs_source, 3,
-		  MTabs_Type_Left, 75,
+		  MTabs_Type_Up, 30,
 		  &canvas_style);
     
     m_create_button(&butt[0], &tabs_source[0].cont, 10, 103, 100, 35, t_add, &b_add, 0, 0, &button_style);
-    m_create_button(&butt[1], host->host, 115, 183, 100, 35, t_remove, &b_rem, 0, 0, &button_style);
+    m_create_button(&butt[2], &tabs_source[0].cont, 10, 133, 100, 35, t_add, &b_rem, 0, 0, &button_style);
+    m_create_button(&butt[1], host->host, 115, 183, 100, 35, t_remove, &b_tree, 0, 0, &button_style);
 
     m_create_text_field(tf, &tabs_source[2].cont,
 			5, 0, 310, 150,

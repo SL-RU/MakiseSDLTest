@@ -43,6 +43,7 @@ MInputData inp_handler(MInputData d, MInputResultEnum res)
 {
     if(d.event == M_INPUT_CLICK && res == M_INPUT_NOT_HANDLED)
     {
+	printf("not h %d\n", d.key);
 	if(d.key == M_KEY_LEFT)
 	    makise_g_host_focus_prev(host);
 	if(d.key == M_KEY_RIGHT)
@@ -183,7 +184,14 @@ int main(void) {
 			SDL_Quit();
 			return EXIT_SUCCESS;
 			break;
+		    case SDLK_EQUALS:
+			makise_g_host_focus_next(host);
+			break;
+		    case SDLK_MINUS:
+			makise_g_host_focus_prev(host);
+			break;
 		    }
+		    
 		}
 	    }
 	    while (SDL_PollEvent(&event));
