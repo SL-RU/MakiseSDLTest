@@ -3,8 +3,9 @@
 #include <stdint.h>
 #include "makise.h"
 #include "makise_gui.h"
-#include "list_test.h"
+//#include "list_test.h"
 #include "makise_sdl2.h"
+#include "tests.h"
 
 SDL_Renderer *renderer;
 SDL_Window *window;
@@ -233,7 +234,7 @@ void start_m()
     printf("%d\n", (uint32_t)(sz));
 
 
-    at_list_init(gu, host);
+    tests_buttons_init(host);
     
     
     mGui = gu;
