@@ -170,50 +170,50 @@ void at_list_init(MakiseGUI *gui, MHost *host)
 
 //    m_create_slist(&list[1], host->host, 160, 10, 156, 145, 0, &l_onselection, &l_rem, MSList_Checkbox, &canvas_style, &lable_style);
 
-    m_create_tabs(&tabs, host->host,
-		  0, 10, 320, 200,
-		  tabs_source, 3,
-		  MTabs_Type_Up, 30,
-		  &canvas_style);
+    /* m_create_tabs(&tabs, host->host, */
+    /* 		  0, 10, 320, 200, */
+    /* 		  tabs_source, 3, */
+    /* 		  MTabs_Type_Up, 30, */
+    /* 		  &canvas_style); */
     
-    m_create_button(&butt[0], &tabs_source[0].cont, 10, 103, 100, 35, t_add, &b_add, 0, 0, &button_style);
-    m_create_button(&butt[2], &tabs_source[0].cont, 10, 133, 100, 35, t_add, &b_rem, 0, 0, &button_style);
-    m_create_button(&butt[1], host->host, 115, 183, 100, 35, t_remove, &b_tree, 0, 0, &button_style);
+    /* m_create_button(&butt[0], &tabs_source[0].cont, 10, 103, 100, 35, t_add, &b_add, 0, 0, &button_style); */
+    /* m_create_button(&butt[2], &tabs_source[0].cont, 10, 133, 100, 35, t_add, &b_rem, 0, 0, &button_style); */
+    /* m_create_button(&butt[1], host->host, 115, 183, 100, 35, t_remove, &b_tree, 0, 0, &button_style); */
 
-    m_create_text_field(tf, &tabs_source[2].cont,
-			5, 0, 310, 150,
-			sample_string,
-			&text_style);
+    /* m_create_text_field(tf, &tabs_source[2].cont, */
+    /* 			5, 0, 310, 150, */
+    /* 			sample_string, */
+    /* 			&text_style); */
 
-    m_create_slider(slider, &tabs_source[1].cont,
-		    10, 5, 150, 40,
-		    &slider_val[0],
-		    10,
-		    0,
-		    &s_onchange, 0,
-		    &slider_style);
-    m_create_slider(&slider[1], &tabs_source[1].cont,
-		    10, 50, 150, 12,
-		    &slider_val[1],
-		    10,
-		    0,
-		    &s_onchange, 0,
-		    &slider_style);
-    m_create_slider(&slider[2], &tabs_source[1].cont,
-		    170, 5, 18, 150,
-		    &slider_val[2],
-		    100,
-		    0,
-		    &s_onchange, 0,
-		    &slider_style);
+    /* m_create_slider(slider, &tabs_source[1].cont, */
+    /* 		    10, 5, 150, 40, */
+    /* 		    &slider_val[0], */
+    /* 		    10, */
+    /* 		    0, */
+    /* 		    &s_onchange, 0, */
+    /* 		    &slider_style); */
+    /* m_create_slider(&slider[1], &tabs_source[1].cont, */
+    /* 		    10, 50, 150, 12, */
+    /* 		    &slider_val[1], */
+    /* 		    10, */
+    /* 		    0, */
+    /* 		    &s_onchange, 0, */
+    /* 		    &slider_style); */
+    /* m_create_slider(&slider[2], &tabs_source[1].cont, */
+    /* 		    170, 5, 18, 150, */
+    /* 		    &slider_val[2], */
+    /* 		    100, */
+    /* 		    0, */
+    /* 		    &s_onchange, 0, */
+    /* 		    &slider_style); */
 
-    m_create_lable(labls, &tabs_source[1].cont,
-		   10, 70, 150, 40,
-		   slider_text,
-		   &lable_style);
+    /* m_create_lable(labls, &tabs_source[1].cont, */
+    /* 		   10, 70, 150, 40, */
+    /* 		   slider_text, */
+    /* 		   &lable_style); */
 		   
-    m_create_canvas(text_c, &tabs_source[0].cont, 20, 20, 101, 51, &canvas_style);
-    m_create_lable(text_l, &text_c->cont, 0, 0, 10000, 50, sample_string, &button_style);
+    /* m_create_canvas(text_c, &tabs_source[0].cont, 20, 20, 101, 51, &canvas_style); */
+    /* m_create_lable(text_l, &text_c->cont, 0, 0, 10000, 50, sample_string, &button_style); */
 
     for (uint32_t i = 0; i < 10; i++) {
 	//l_source[i].text = t_list[i];

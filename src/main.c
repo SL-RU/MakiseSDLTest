@@ -31,12 +31,12 @@ void mt_draw(MakiseGUI * g)
 {
     for (uint32_t i = 0; i < 16; i++) {
 	
-	makise_d_rect_filled(mGui->buffer, i * 10, 0, 10, 10, 0xFFFF, 0xFFFF);
+//	makise_d_rect_filled(mGui->buffer, i * 10, 0, 10, 10, 0xFFFF, 0xFFFF);
     }
     sprintf(bu, "x: %d, y%d", x, y);
-    makise_d_string(mGui->buffer, bu, 100, 400, 400, MDTextPlacement_LeftUp, &F_Arial12, MC_Cyan);
+    //makise_d_string(mGui->buffer, bu, 100, 400, 400, MDTextPlacement_LeftUp, &F_Arial12, MC_Cyan);
 
-    at_list_u();
+    //at_list_u();
 //    makise_g_host_call(host, M_G_CALL_DRAW);
 }
 
@@ -68,7 +68,7 @@ int main(void) {
 
     
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer(800, 600, 0, &window, &renderer);
+    SDL_CreateWindowAndRenderer(320, 240, 0, &window, &renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
     screen = SDL_GetWindowSurface(window);
@@ -77,7 +77,7 @@ int main(void) {
     
     SDL_Surface *surface;
     
-    surface = SDL_CreateRGBSurface(0, 800, 600, 16, 0b1111100000000000, 0b11111100000, 0b11111, 0b0);
+    surface = SDL_CreateRGBSurface(0, 320, 240, 16, 0b1111100000000000, 0b11111100000, 0b11111, 0b0);
 
     
     
@@ -220,7 +220,7 @@ void start_m()
     host->input.result_handler = inp_handler;
     
     //init driver structure
-    makise_sdl2_driver(dr, 800, 600, screen);
+    makise_sdl2_driver(dr, 320, 240, screen);
     
     //malloc small buffer
     //dr->buffer = sb;//malloc(dr->size);
