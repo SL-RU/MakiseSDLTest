@@ -5,4 +5,6 @@
 extern MakiseStyle ts_button;
 extern MakiseStyle ts_textfield;
 extern MakiseStyle ts_lable;
+extern MakiseStyle ts_lable_small;
+extern MakiseStyle ts_canvas;
 #endif

@@ -1,5 +1,6 @@
 #ifndef tests_h
 #define tests_h 1
+#include <stdio.h>
 
 #include "makise.h"
 #include "makise_gui.h"
@@ -18,6 +19,7 @@ typedef struct
 } tests_struct;
 
 void tests_buttons_init(MHost *h);
+void tests_container_init(MHost *h);
 void tests_text_init(MHost *h);
 void tests_sliders_init(MHost *h);
 void tests_list_init(MHost *h);
