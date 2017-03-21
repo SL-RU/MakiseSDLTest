@@ -160,7 +160,7 @@ void s_onchange(MSlider* b, uint32_t val)
 
 void at_list_u()
 {
-    text_l->el.position.x--;
+//    text_l->el.position.x--;
 }
     
 void at_list_init(MakiseGUI *gui, MHost *host)

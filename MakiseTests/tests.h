@@ -18,6 +18,7 @@ typedef struct
     MSList_Item item;
 } tests_struct;
 
+void tests_hello_init(MHost *h);
 void tests_buttons_init(MHost *h);
 void tests_container_init(MHost *h);
 void tests_text_init(MHost *h);
