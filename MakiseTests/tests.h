@@ -21,6 +21,7 @@ typedef struct
 void tests_hello_init(MHost *h);
 void tests_buttons_init(MHost *h);
 void tests_container_init(MHost *h);
+void tests_position_init(MHost *h);
 void tests_text_init(MHost *h);
 void tests_sliders_init(MHost *h);
 void tests_list_init(MHost *h);

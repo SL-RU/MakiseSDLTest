@@ -234,9 +234,10 @@ void start_m()
     printf("%d\n", (uint32_t)(sz));
 
 
-    tests_hello_init(host);
-    tests_container_init(host);
+    //tests_hello_init(host);
+    //tests_container_init(host);
     //tests_buttons_init(host);
+    tests_position_init(host);
     
     mGui = gu;
 //    ili9340_init(gu);
