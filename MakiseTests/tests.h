@@ -8,7 +8,7 @@
 
 #include "tests_styles.h"
 
-MHost** tests_init();
+void tests_init(MHost *h);
 
 
 typedef struct
@@ -22,9 +22,12 @@ void tests_hello_init(MHost *h);
 void tests_buttons_init(MHost *h);
 void tests_container_init(MHost *h);
 void tests_position_init(MHost *h);
-void tests_text_init(MHost *h);
-void tests_sliders_init(MHost *h);
-void tests_list_init(MHost *h);
 
+void tests_selector_init(MHost *h);
+
+void tests_run(uint8_t id);
+
+#define tests_items_len 4
+extern MSList_Item tests_items[tests_items_len];
 
 #endif
