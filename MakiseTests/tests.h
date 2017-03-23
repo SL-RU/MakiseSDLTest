@@ -28,7 +28,7 @@ void tests_selector_init(MHost *h);
 
 void tests_run(uint8_t id);
 
-#define tests_items_len 4
+#define tests_items_len 5
 extern MSList_Item tests_items[tests_items_len];
 
 #endif

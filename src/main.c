@@ -245,8 +245,8 @@ void start_m()
     //tests_container_init(host);
     //tests_buttons_init(host);
     //tests_position_init(host);
-    tests_slider_init(host);
-    //tests_init(host);
+    //tests_slider_init(host);
+    tests_init(host);
     
     mGui = gu;
 //    ili9340_init(gu);

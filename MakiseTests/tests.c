@@ -1,10 +1,11 @@
 #include "tests.h"
 
-MSList_Item tests_items[4] = {
+MSList_Item tests_items[tests_items_len] = {
     {"hello world", 0},
     {"buttons", 1},
     {"positioning", 2},
-    {"container", 3}
+    {"container", 3},
+    {"sliders", 4}
 };
 
 MHost *tests_host;
@@ -31,6 +32,10 @@ void tests_run(uint8_t id)
     case 3:
 	tests_container_init(tests_host);
 	break;
+    case 4:
+	tests_slider_init(tests_host);
+	break;
+
     default:
 	break;
     }
