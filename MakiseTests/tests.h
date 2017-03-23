@@ -22,6 +22,7 @@ void tests_hello_init(MHost *h);
 void tests_buttons_init(MHost *h);
 void tests_container_init(MHost *h);
 void tests_position_init(MHost *h);
+void tests_slider_init(MHost *h);
 
 void tests_selector_init(MHost *h);
 
