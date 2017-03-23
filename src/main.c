@@ -208,6 +208,7 @@ void mt_predraw(MakiseGUI * g)
 //    printf("p");
 }
 
+MPosition ma_g_hpo;
 void start_m()
 {
     MakiseGUI    * gu = &Gu;//malloc(sizeof(MakiseGUI));
@@ -218,6 +219,12 @@ void start_m()
     host->host->gui = gu;
     makise_gui_init(host);
     host->input.result_handler = inp_handler;
+
+    ma_g_hpo = mp_rel(0,0,320,240);
+    ma_g_hpo.real_x = 0;
+    ma_g_hpo.real_y = 0;
+    host->host->position = &ma_g_hpo;
+    
     
     //init driver structure
     makise_sdl2_driver(dr, 320, 240, screen);

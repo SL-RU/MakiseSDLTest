@@ -17,6 +17,7 @@ void tests_init(MHost *h)
 
 void tests_run(uint8_t id)
 {
+    makise_g_cont_clear(tests_host->host);
     switch (id) {
     case 0:
 	tests_hello_init(tests_host);
