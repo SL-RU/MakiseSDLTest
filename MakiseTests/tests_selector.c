@@ -2,7 +2,7 @@
 
 
 
-static char text[] = "Select test!"; //lable's text
+static char text[] = "Select test:"; //lable's text
 
 //MButton tests_selector_b; //button structure
 //MLable tests_selector_lable; //lable structure

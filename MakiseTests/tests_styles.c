@@ -66,7 +66,7 @@ MakiseStyle ts_canvas =
     0,
     //bg       font     border   double_border
     {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
-    {MC_Gray, MC_White, MC_White, 0},  //normal
-    {MC_Black, MC_White, MC_White,   0},  //focused
+    {MC_Gray, MC_Gray, MC_White, 0},  //normal
+    {MC_Black, MC_Gray, MC_White,   0},  //focused
     {MC_Black, MC_White, MC_White, 0},  //active
 };

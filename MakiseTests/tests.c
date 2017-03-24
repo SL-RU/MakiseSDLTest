@@ -5,7 +5,7 @@ MSList_Item tests_items[tests_items_len] = {
     {"buttons", 1},
     {"positioning", 2},
     {"container", 3},
-    {"sliders", 4}
+    {"sliders", 4},
 };
 
 MHost *tests_host;

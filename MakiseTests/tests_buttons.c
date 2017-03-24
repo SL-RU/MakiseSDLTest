@@ -23,18 +23,18 @@ static MLable lable[6];
 static MToggle toggle[1];
 static MTextField textfield;
 
-void  ts_buttons_click(MButton* b)
+static void click(MButton* b)
 {
     lable[3].text = b->text;
 }
-uint8_t ts_buttons_onkey(MButton* b, MInputData data)
+static uint8_t onkey(MButton* b, MInputData data)
 {
     sprintf(lbuffer[1], "%s key: %d event: %d",
 	    b->text, data.key, data.event);
     //return 1 if you want click event be executed
     return toggle->state; //if send click events enabled
 }
-void ts_buttons_onfocus(MButton* b, MFocusEnum type)
+static void onfocus(MButton* b, MFocusEnum type)
 {
     //when focus recieved or leaved
     sprintf(lbuffer[2], "%s type: %d",
@@ -60,9 +60,9 @@ void tests_buttons_init(MHost *h)
 			       85, 30), //width,height
 			text[i],   //text
 			//events:
-			&ts_buttons_click, //click event
-			&ts_buttons_onkey, //event when key pressed on element
-			&ts_buttons_onfocus, //when focus recieved / loosed
+			&click, //click event
+			&onkey, //event when key pressed on element
+			&onfocus, //when focus recieved / loosed
 			&ts_button //style
 	    );
     }

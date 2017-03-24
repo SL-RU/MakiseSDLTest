@@ -13,7 +13,7 @@ static char mode_text[][150] =
     "sver - stretch only in vertical",
     "rel - simple relative position. Anchor is left up corner",
     "anc - simple relative position. Anchor is custom. In this sample RightDown is choosen.",
-    "cust - fully customizable. You can select stretch type or anchor, margins and size. In this sample choosen vertical stretch and anchor was right side"
+    "cust - fully customizable. You can select stretch type or anchor, margins and size. In this sample choosen vertical stretch and anchor is the right side"
 };
 
 static MButton button[3]; //button structure
@@ -61,11 +61,11 @@ void ts_position_set(uint8_t t) //set position mode
 }
 
 //event when button was clicked
-void  ts_position_click(MButton* button) //button - button wich was clicked
+void  ts_position_click(MButton* b) //button - button wich was clicked
 {
     ts_position_set(mode+1);
 }
-uint8_t ts_position_onkey(MButton* button, MInputData d) //button - button wich was clicked
+uint8_t ts_position_onkey(MButton* b, MInputData d) //button - button wich was clicked
 {
     int x = 0, y = 0;
     if(d.event == M_INPUT_CLICK)
@@ -87,14 +87,14 @@ uint8_t ts_position_onkey(MButton* button, MInputData d) //button - button wich 
 	    return 0;
 	}
     }
-    if(button == &button[0])
+    if(b == &button[0])
     {
 	if((int32_t)(canvas.el.position.width) > -x)
 	    canvas.el.position.width += x;
 	if((int32_t)(canvas.el.position.height) > -y)
 	    canvas.el.position.height += y;
 	return 2;
-    } else if(button == &button[1])
+    } else if(b == &button[1])
     {
 	canvas.el.position.left += x;
 	canvas.el.position.up += y;
