@@ -27,6 +27,7 @@ void tests_slider_init(MHost *h);
 void tests_selector_init(MHost *h);
 
 void tests_run(uint8_t id);
+void tests_exit();
 
 #define tests_items_len 5
 extern MSList_Item tests_items[tests_items_len];

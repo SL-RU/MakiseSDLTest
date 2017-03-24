@@ -180,10 +180,11 @@ int main(void) {
 						     M_INPUT_CLICK, 100);	      
 			break;
 		    case SDLK_ESCAPE:
-			SDL_DestroyRenderer(renderer);
-			SDL_DestroyWindow(window);
-			SDL_Quit();
-			return EXIT_SUCCESS;
+			//SDL_DestroyRenderer(renderer);
+			//SDL_DestroyWindow(window);
+			//SDL_Quit();
+			tests_exit();
+
 			break;
 		    case SDLK_EQUALS:
 			makise_g_host_focus_next(host);

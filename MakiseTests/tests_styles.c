@@ -12,6 +12,17 @@ MakiseStyle ts_button =
     {MC_Green, MC_White, MC_White, 0}, //active
 };
 
+MakiseStyle ts_slider =
+{
+    MC_White,
+    &F_Arial24,
+    0,
+    //bg       font     border   double_border
+    {0, 0,  0, 0},  //unactive
+    {MC_Black, MC_Gray, MC_Gray, 0},//normal
+    {MC_Black, MC_White, MC_White, 0}, //focused
+    {MC_Green, MC_White, MC_White, 0}, //active
+};
 MakiseStyle ts_lable =
 {
     MC_White,

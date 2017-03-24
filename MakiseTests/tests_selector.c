@@ -25,7 +25,9 @@ void tests_selector_init(MHost *h)
 		   text, //header
 		   0, &ts_selector_click, //events
 		   MSList_List,
-		   &ts_canvas, &ts_canvas);
+		   &ts_canvas, &ts_button);
 
     m_slist_set_array(&list, tests_items, tests_items_len);
+
+    makise_g_focus(&list.el, M_G_FOCUS_GET);
 }
