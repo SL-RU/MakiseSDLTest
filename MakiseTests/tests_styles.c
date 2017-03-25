@@ -62,7 +62,7 @@ MakiseStyle ts_textfield =
 MakiseStyle ts_canvas =
 {
     MC_White,
-    &F_Arial24,
+    &F_Arial16,
     0,
     //bg       font     border   double_border
     {MC_Black, MC_Gray, MC_Gray,    0},  //unactive

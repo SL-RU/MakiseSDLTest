@@ -23,13 +23,14 @@ void tests_buttons_init(MHost *h);
 void tests_container_init(MHost *h);
 void tests_position_init(MHost *h);
 void tests_slider_init(MHost *h);
+void tests_styletest_init(MHost *h);
 
 void tests_selector_init(MHost *h);
 
 void tests_run(uint8_t id);
 void tests_exit();
 
-#define tests_items_len 5
+#define tests_items_len 6
 extern MSList_Item tests_items[tests_items_len];
 
 #endif
