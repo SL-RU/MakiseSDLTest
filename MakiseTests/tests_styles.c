@@ -11,6 +11,18 @@ MakiseStyle ts_button =
     {MC_White, MC_Green, MC_White, 0}, //focused
     {MC_Green, MC_White, MC_White, 0}, //active
 };
+MakiseStyle ts_button_small =
+{
+    MC_White,
+    &F_Arial12,
+    0,
+    //bg       font     border   double_border
+    {MC_Black, MC_Gray, MC_Gray, 0},  //unactive
+    {MC_Black, MC_White, MC_White, 0},//normal
+    {MC_White, MC_Green, MC_White, 0}, //focused
+    {MC_Green, MC_White, MC_White, 0}, //active
+};
+
 
 MakiseStyle ts_slider =
 {
@@ -66,7 +78,43 @@ MakiseStyle ts_canvas =
     0,
     //bg       font     border   double_border
     {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
+    {MC_Black, MC_Gray, MC_White, 0},  //normal
+    {MC_Black, MC_Gray, MC_White,   0},  //focused
+    {MC_Black, MC_White, MC_White, 0},  //active
+};
+
+MakiseStyle ts_tabs =
+{
+    MC_White,
+    &F_Arial16,
+    0,
+    //bg       font     border   double_border
+    {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
     {MC_Gray, MC_Gray, MC_White, 0},  //normal
     {MC_Black, MC_Gray, MC_White,   0},  //focused
     {MC_Black, MC_White, MC_White, 0},  //active
 };
+
+MakiseStyle ts_slist_item =
+{
+    MC_White,
+    &F_Arial16,
+    0,
+    //bg       font     border   double_border
+    {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
+    {MC_Black, MC_Gray, MC_White, 0},  //normal
+    {MC_White, MC_Green, MC_White,   0},  //focused
+    {MC_Black, MC_White, MC_White, 0},  //active
+};
+MakiseStyle ts_slist =
+{
+    MC_White,
+    &F_Arial16,
+    0,
+    //bg       font     border   double_border
+    {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
+    {MC_Black, MC_Gray, MC_Gray, 0},  //normal
+    {MC_Black, MC_White, MC_White,   0},  //focused
+    {MC_Black, MC_White, MC_White, 0},  //active
+};
+
