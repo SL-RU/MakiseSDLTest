@@ -7,6 +7,7 @@ MSList_Item tests_items[tests_items_len] = {
     {"container", 3},
     {"sliders", 4},
     {"styles", 5},
+    {"tabs"},
 };
 
 MHost *tests_host;
@@ -38,6 +39,10 @@ void tests_run(uint8_t id)
 	break;
     case 5:
 	tests_styletest_init(tests_host);
+	break;
+    case 6:
+	tests_tabs_init(tests_host);
+	break;
     default:
 	break;
     }

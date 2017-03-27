@@ -14,7 +14,7 @@ void ts_selector_click(MSList *l, MSList_Item *selected)
 {
     if(selected != 0)
     {
-	tests_run(selected->value);
+	tests_run(selected->id);
     }
 }
 
