@@ -160,6 +160,9 @@ void tests_container_init(MHost *h)
 			&select, 0, 0,
 			&ts_button); //style
     }
+
+    buttons[2].el.position.up -= 20;
+    
     //ADD NEW ELEMENT to container. Add two first buttons to the canvas
     makise_g_cont_add(c, &buttons[0].el);
     makise_g_cont_add(c, &buttons[1].el);

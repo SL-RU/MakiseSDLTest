@@ -177,7 +177,9 @@ int main(void) {
 		    case SDLK_RETURN:
 			makise_gui_input_send_button(host,
 						     M_KEY_OK,
-						     M_INPUT_CLICK, 100);	      
+						     M_INPUT_CLICK, 100);
+		    case SDLK_DELETE:
+			makise_g_print_tree(host);
 			break;
 		    case SDLK_ESCAPE:
 			//SDL_DestroyRenderer(renderer);

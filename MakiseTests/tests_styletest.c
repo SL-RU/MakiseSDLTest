@@ -1,33 +1,19 @@
 #include "tests.h"
 
 
-static char lable_text[] = ""; //lable's text
+static char lable_text[30] = {0}; //lable's text
+static char path_text[100] = {0}; //lable's text
 
 static MLable lable[2]; //lable structure
 static MSlider sliders[3];
 static MButton button_invis[1]; //button structure
-static char button_invis_t[] = "transparent"; //button structure
-
 
 static MTextField textfield[1];
 static char textfield_text[] = "MakiseGUI - library written on pure C. It implements primitives drawing methods, some drivers for displays and frameworks and full featured gui with many different elements, andvanced positioning, containers, input system and etc. It crated for embed platforms and can comfortably function even in 30kb of ram including two buffers. Main target is ARM MCUs. Main purpose of this GUI - to give developer simple control and development of reach gui. GUI supports pointer input as well as only keyboard.";
 static MButton button[1];
-static char button_text[] = "Button";
 
 
 static MCanvas canvas[2];
-
-static MakiseStyle button_s =
-{
-    MC_White,
-    &F_Arial24,
-    0,
-    //bg       font     border   double_border
-    {MC_Black, MC_Gray, MC_Gray, 0},  //unactive
-    {MC_Black, MC_White, MC_White, 0},//normal
-    {MC_White, MC_Green, MC_White, 0}, //focused
-    {MC_Green, MC_White, MC_White, 0}, //active
-};
 
 static MTabs tabs_e[1];
 
@@ -101,6 +87,7 @@ static void init_styles()
     styles[s_button] = ts_button;
     styles[s_slider] = ts_slider;
     styles[s_lable] = ts_lable;
+    styles[s_lable].font = &F_Arial16;
     styles[s_textfield] = ts_textfield;
     styles[s_canvas] = ts_canvas;
     styles[s_tabs] = ts_tabs;
@@ -108,11 +95,6 @@ static void init_styles()
     styles[s_slist] = ts_slist;
 }
 
-//event when button was clicked
-static void  click(MButton* b) //b - button wich was clicked
-{
-    
-}
 static int32_t cr = 0, cg = 0, cb = 0;
 
 static void  invis_click(MButton* b) //b - button wich was clicked
@@ -206,6 +188,15 @@ static void select(MSList *l, MSList_Item *selected)
 	break;
     }
 
+    sprintf(path_text, "%s->%s->%s", list_elements[lists[0].selected->id].text,
+	    list_theme[lists[1].selected->id].text,
+	    list_color[lists[2].selected->id].text);
+
+    cr = (*selected_color) >> 11;
+    cg = ((*selected_color) >> 5) & 0b111111;
+    cb = ((*selected_color)) & 0b11111;
+    onchange(0, 0);
+
 //    m_tabs_select_tab(tabs_e, 3);
 }
 
@@ -237,15 +228,15 @@ void tests_styletest_init(MHost *h)
 	m_create_button(button_invis, &canvas->cont,
 			mp_cust(0, 0, 0, MPositionStretch_LeftRight,
 				0, 20, 20, MPositionStretch_Down),
-			button_invis_t,
-			&click,
+			"transparent",
+			&invis_click,
 			0, //event when key pressed on element
 			0, //when focus recieved / loosed
 			&ts_button_small); //style
 	m_create_lable(&lable[0], //pointer to the structure
 		       &canvas->cont, //container
-		       mp_cust(0, 0, 0, MPositionStretch_LeftRight,
-			       0, 0, 20, MPositionStretch_Down),
+		       mp_cust(1, 1, 0, MPositionStretch_LeftRight,
+			       0, 1, 20, MPositionStretch_Down),
 		       lable_text, //text
 		       &styles[s_lable] //style
 	    );
@@ -253,7 +244,14 @@ void tests_styletest_init(MHost *h)
 
     m_create_canvas(&canvas[1], h->host, mp_sall(90, 0, 0, 0), &styles[s_canvas]);
 
-    m_create_tabs(tabs_e, &canvas[1].cont, mp_sall(0,0,0,0),
+    m_create_lable(&lable[1], //pointer to the structure
+		   &canvas[1].cont, //container
+		   mp_cust(1, 1, 0, MPositionStretch_LeftRight,
+			   0, 1, 20, MPositionStretch_Down),
+		   path_text, //text
+		   &styles[s_lable] //style
+	);
+    m_create_tabs(tabs_e, &canvas[1].cont, mp_sall(0,0,0,20),
 		  tabs, 5,
 		  MTabs_Type_Up, 20,
 		  &styles[s_tabs]);
@@ -302,7 +300,7 @@ void tests_styletest_init(MHost *h)
 	    m_create_button(button, &tabs[4].cont,
 			    mp_cust(10,40, 0, MPositionStretch_LeftRight,
 				    0, 3, 30, MPositionStretch_Down),
-			    button_text,
+			    "Button",
 			    0,0, 0,
 			    &styles[s_button]);
 	}
