@@ -92,7 +92,7 @@ MakiseStyle ts_tabs =
     {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
     {MC_Gray, MC_Gray, MC_White, 0},  //normal
     {MC_Black, MC_Gray, MC_White,   0},  //focused
-    {MC_Black, MC_White, MC_White, 0},  //active
+    {MC_Black, MC_Green, MC_White, 0},  //active
 };
 
 MakiseStyle ts_slist_item =
