@@ -23,12 +23,29 @@ static MSlider slider[1];
 static int32_t sz = 30;
 static int32_t stype = 0;
 
-static MButton tst_b[4];
-static MLable tst_l[4];
+static MTextField tst_tf[1];
+static MButton tst_b[5];
+static MLable tst_l[5];
+static char tst_l_t[40];
+static MSlider tst_s[1];
+static int32_t tst_s_v[1];
 
 static void tst_b_0_click(MButton *b)
 {
-    tst_l[0].text = "You have click that button!!1";
+    tst_tf[0].text = "You have click that button!!1";
+}
+
+static void tst_onchange(MSlider* b, int32_t val)
+{
+    sprintf(tst_l_t, "%d", val);
+}
+static void tst_b_3_click(MButton *b)
+{
+    tst_l[3].text = "You have clicked first button!!1";
+}
+static void tst_b_4_click(MButton *b)
+{
+    tst_l[3].text = "You have clicked second button!!1";
 }
 
 static void recreate()
@@ -47,39 +64,52 @@ static void recreate()
 		  tabs_t, 4,
 		  t, sz, &ts_tabs);
     {
+	//First tab
 	m_create_button(&tst_b[0], &tabs_t[0].cont,
 			mp_shor(20,5,20,40),
 			"First tab's button",
 			&tst_b_0_click, 0, 0, &ts_button);
-	m_create_lable(&tst_l[0],  &tabs_t[0].cont,
-		       mp_shor(20,5,70,40),
-		       "First tab's lable",
+	m_create_text_field(&tst_tf[0],  &tabs_t[0].cont,
+		       mp_sall(20,5,70,40),
+		       "First tab.\n You can change header's type and size using buttons in the bottom. Also you can switch tabs.",
 		       &ts_textfield);
     }
     {
+	//Second
 	m_create_lable(&tst_l[1],  &tabs_t[1].cont,
 		       mp_shor(20,5,70,40),
 		       "This is second tab without any buttons",
 		       &ts_textfield);
     }
     {
+	//Third
+ 	m_create_slider(&tst_s[0], &tabs_t[2].cont,
+			mp_shor(20, 5, 5, 30),
+			tst_s_v, 0, 99,
+			MSlider_Type_ReadWrite,
+			&tst_onchange, 0, &ts_slider);
 	m_create_lable(&tst_l[2],  &tabs_t[2].cont,
 		       mp_shor(20,5,70,40),
 			"This is third tab with slider",
 		       &ts_textfield);
+	m_create_lable(&tst_l[4],  &tabs_t[2].cont,
+		       mp_shor(20,5,150,40),
+		       tst_l_t,
+		       &ts_lable);
     }
     {
+	//Four
 	m_create_button(&tst_b[3], &tabs_t[3].cont,
-			mp_shor(20,5,20,40),
+			mp_shor(20, 5, 5, 30),
 			"First button",
-			&tst_b_0_click, 0, 0, &ts_button);
-	m_create_button(&tst_b[3], &tabs_t[3].cont,
-			mp_shor(20,5,20,40),
+			&tst_b_3_click, 0, 0, &ts_button);
+	m_create_button(&tst_b[4], &tabs_t[3].cont,
+			mp_shor(20, 5, 40, 30),
 			"Second button",
-			&tst_b_0_click, 0, 0, &ts_button);
+			&tst_b_4_click, 0, 0, &ts_button);
 
 	m_create_lable(&tst_l[3],  &tabs_t[3].cont,
-		       mp_shor(20,5,70,40),
+		       mp_shor(20,5,80,40),
 		       "Fours tab with two buttons",
 		       &ts_textfield);
     }
