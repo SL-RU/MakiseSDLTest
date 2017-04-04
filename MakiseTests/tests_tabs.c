@@ -18,7 +18,7 @@ static MTabs_Tab tabs_t[] =
     {"Third tab"},
     {"Settings"},
 };
-static MLable lables[4];
+//static MLable lables[4];
 static MSlider slider[1];
 static int32_t sz = 30;
 static int32_t stype = 0;

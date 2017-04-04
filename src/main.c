@@ -27,29 +27,19 @@ int x = 0;
 int y = 0;
 char bu[100] = {0};
 
-void mt_draw(MakiseGUI * g)
-{
-    for (uint32_t i = 0; i < 16; i++) {
-	
-//	makise_d_rect_filled(mGui->buffer, i * 10, 0, 10, 10, 0xFFFF, 0xFFFF);
-    }
-    sprintf(bu, "x: %d, y%d", x, y);
-    //makise_d_string(mGui->buffer, bu, 100, 400, 400, MDTextPlacement_LeftUp, &F_Arial12, MC_Cyan);
-
-    //at_list_u();
-//    makise_g_host_call(host, M_G_CALL_DRAW);
-}
-
+//input result handler. That will be called by gui thread after recieving result from input
 MInputData inp_handler(MInputData d, MInputResultEnum res)
 {
     if(d.event == M_INPUT_CLICK && res == M_INPUT_NOT_HANDLED)
     {
-	printf("not h %d\n", d.key);
-	if(d.key == M_KEY_LEFT)
+	//when click wasn't handled
+	
+	//printf("not h %d\n", d.key);
+	if(d.key == M_KEY_LEFT) //if left wasn't handled - we'll switch focus
 	    makise_g_host_focus_prev(host);
-	if(d.key == M_KEY_RIGHT)
+	if(d.key == M_KEY_RIGHT) //also
 	    makise_g_host_focus_next(host);
-	if(d.key == M_KEY_UP)
+	if(d.key == M_KEY_UP) //the same
 	    makise_g_host_focus_prev(host);
 	if(d.key == M_KEY_DOWN)
 	    makise_g_host_focus_next(host);
@@ -64,34 +54,32 @@ MInputData inp_handler(MInputData d, MInputResultEnum res)
 uint8_t prsed = 0;
 int main(void) {
     SDL_Event event;
-    int i;
 
-    
+    //init SDL
     SDL_Init(SDL_INIT_VIDEO);
     SDL_CreateWindowAndRenderer(320, 240, 0, &window, &renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
     screen = SDL_GetWindowSurface(window);
 
-
     
-    SDL_Surface *surface;
-    
-    surface = SDL_CreateRGBSurface(0, 320, 240, 16, 0b1111100000000000, 0b11111100000, 0b11111, 0b0);
-
-    
-    
+    //init makise GUI & start
     start_m();
+
+    
     while (1) {
+	//draw & predraw gui
 	makise_g_host_call(host, M_G_CALL_PREDRAW);
 	makise_g_host_call(host, M_G_CALL_DRAW);
-	mt_draw(0);
+
+	//call driver
 	makise_sdl2_draw(mGui);
 
+	//update sdl
 	SDL_UpdateWindowSurface(window);
 
 	
-	//SDL_Delay(6);
+	//input system
 	if(SDL_WaitEventTimeout(&event, 50))
 	{
 	    do
@@ -146,6 +134,13 @@ int main(void) {
 			makise_gui_input_send(host, d);
 		    }
 		    break;
+		    /*Arrows - arrows
+		      Tab - switch tabs or focus
+		      Return - OK
+		      Minus/Equals - switch focus
+		      Esc - exit from test
+		      Delete - print tree of elements
+		     */
 		case SDL_KEYDOWN:
 		    switch (event.key.keysym.sym)
 		    {
@@ -178,6 +173,7 @@ int main(void) {
 			makise_gui_input_send_button(host,
 						     M_KEY_OK,
 						     M_INPUT_CLICK, 100);
+			break;
 		    case SDLK_DELETE:
 			makise_g_print_tree(host);
 			break;
@@ -199,29 +195,23 @@ int main(void) {
 		}
 	    }
 	    while (SDL_PollEvent(&event));
+	    //perform input
 	    makise_gui_input_perform(host);
 	}
     }
 }
 
-void mt_predraw(MakiseGUI * g)
-{
-//    canv[0].el.position.x = (canv[0].el.position.x+1) %150;
-//    makise_g_host_call(host, M_G_CALL_PREDRAW);
-//    printf("p");
-}
-
 MPosition ma_g_hpo;
 void start_m()
 {
-    MakiseGUI    * gu = &Gu;//malloc(sizeof(MakiseGUI));
-    MakiseBuffer * bu = &Bu;//malloc(sizeof(MakiseBuffer));
-    MakiseDriver * dr = &Dr;//malloc(sizeof(MakiseDriver));
-    host = &hs;//malloc(sizeof(MHost));
-    host->host = &co;//malloc(sizeof(MContainer));
+    MakiseGUI    * gu = &Gu;
+    MakiseBuffer * bu = &Bu;
+    MakiseDriver * dr = &Dr;
+    host = &hs;
+    host->host = &co;
     host->host->gui = gu;
-    makise_gui_init(host);
-    host->input.result_handler = inp_handler;
+    makise_gui_init(host); //init gui host
+    host->input.result_handler = &inp_handler;
 
     ma_g_hpo = mp_rel(0,0,320,240);
     ma_g_hpo.real_x = 0;
@@ -232,31 +222,19 @@ void start_m()
     //init driver structure
     makise_sdl2_driver(dr, 320, 240, screen);
     
-    //malloc small buffer
-    //dr->buffer = sb;//malloc(dr->size);
-    //printf("%d\n", (uint32_t)(dr->size));
-    //init gui struct
-
     uint32_t sz = makise_init(gu, dr, bu);
-    //malloc big buffer
     bu->buffer = bufff;
     memset(bu->buffer, 0, sz);
-    printf("%d\n", (uint32_t)(sz));
+    //printf("%d\n", (uint32_t)(sz));
 
-
-    //tests_hello_init(host);
-    //tests_container_init(host);
-    //tests_buttons_init(host);
-    //tests_position_init(host);
-    //tests_slider_init(host);
-    tests_init(host);
     
     mGui = gu;
-//    ili9340_init(gu);
     makise_start(gu);
 
-    mGui->predraw = &mt_predraw;
-    mGui->draw = &mt_draw;
-    //makise_g_focus(&(butt[0].el), M_G_FOCUS_GET);
+    mGui->predraw = 0; //we don't need driver to execute those methods
+    mGui->draw = 0; //we'll execute them by ourself in loop. It required when app is multitheading or uses interrupts
 
+    
+    //run tests
+    tests_init(host);
 }

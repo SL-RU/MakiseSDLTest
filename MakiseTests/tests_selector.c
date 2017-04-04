@@ -21,11 +21,11 @@ void ts_selector_click(MSList *l, MSList_Item *selected)
 void tests_selector_init(MHost *h)
 {
     m_create_slist(&list, h->host,
-		   mp_sall(1,1,1,1), //position
+		   mp_sall(0,0,0,0), //position
 		   text, //header
 		   0, &ts_selector_click, //events
 		   MSList_List,
-		   &ts_canvas, &ts_button);
+		   &ts_slist_small, &ts_slist_item_big);
 
     m_slist_set_array(&list, tests_items, tests_items_len);
 

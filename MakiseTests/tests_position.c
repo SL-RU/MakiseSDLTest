@@ -6,7 +6,7 @@ static char button_text[][100] =
     "Position",
     "Type"
 };      //button's text
-static char mode_text[][150] =
+static char mode_text[][170] =
 {
     "mp_sall - stretch in all directions",
     "shor - stretch only in horizontal",

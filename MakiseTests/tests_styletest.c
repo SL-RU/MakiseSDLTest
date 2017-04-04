@@ -103,7 +103,7 @@ static void  invis_click(MButton* b) //b - button wich was clicked
 	return;
     *selected_color = MC_Transparent;
 }
-static void onchange(MSlider* b, uint32_t val)
+static void onchange(MSlider* b, int32_t val)
 {
     if(selected_color == 0)
 	return;

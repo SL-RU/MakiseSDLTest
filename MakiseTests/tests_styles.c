@@ -90,7 +90,7 @@ MakiseStyle ts_tabs =
     0,
     //bg       font     border   double_border
     {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
-    {MC_Gray, MC_Gray, MC_White, 0},  //normal
+    {MC_Gray, MC_White, MC_White, 0},  //normal
     {MC_Black, MC_Gray, MC_White,   0},  //focused
     {MC_Black, MC_Green, MC_White, 0},  //active
 };
@@ -116,5 +116,27 @@ MakiseStyle ts_slist =
     {MC_Black, MC_Gray, MC_Gray, 0},  //normal
     {MC_Black, MC_White, MC_White,   0},  //focused
     {MC_Black, MC_White, MC_White, 0},  //active
+};
+MakiseStyle ts_slist_small =
+{
+    MC_White,
+    &F_Arial12,
+    0,
+    //bg       font     border   double_border
+    {MC_Black, MC_Gray, MC_Gray,    0},  //unactive
+    {MC_Black, MC_Gray, MC_Gray, 0},  //normal
+    {MC_Black, MC_White, MC_White,   0},  //focused
+    {MC_Black, MC_White, MC_White, 0},  //active
+};
+MakiseStyle ts_slist_item_big =
+{
+    MC_White,
+    &F_Arial24,
+    0,
+    //bg       font     border   double_border
+    {MC_Transparent, MC_Gray, MC_Gray,    0},  //unactive
+    {MC_Transparent, MC_White, MC_White, 0},  //normal
+    {MC_White, MC_Green, MC_White,   0},  //focused
+    {MC_Transparent, MC_White, MC_White, 0},  //active
 };
 

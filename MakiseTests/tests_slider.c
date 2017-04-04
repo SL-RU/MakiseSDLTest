@@ -37,7 +37,7 @@ static void click(MButton* b) //b - button wich was clicked
     vertical = !vertical;
     buttons[0].text = button_text[vertical];
 }
-static void onchange(MSlider* b, uint32_t val)
+static void onchange(MSlider* b, int32_t val)
 {
     sprintf(lable_text, "values: %d %d %d", values[0], values[1], values[2]);
 }

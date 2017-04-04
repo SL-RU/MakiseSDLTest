@@ -11,5 +11,7 @@ extern MakiseStyle ts_lable_small;
 extern MakiseStyle ts_canvas;
 extern MakiseStyle ts_tabs;
 extern MakiseStyle ts_slist_item;
+extern MakiseStyle ts_slist_item_big;
+extern MakiseStyle ts_slist_small;
 extern MakiseStyle ts_slist;
 #endif
