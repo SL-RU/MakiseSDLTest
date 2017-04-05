@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include "makise.h"
 #include "makise_gui.h"
-//#include "list_test.h"
 #include "makise_sdl2.h"
 #include "tests.h"
 
@@ -108,7 +107,7 @@ int main(void) {
 		case SDL_MOUSEBUTTONDOWN:
 		    if(event.button.button == SDL_BUTTON_LEFT)
 		    {
-			printf("down\n");
+			//printf("down\n");
 			prsed = 1;
 			MInputData d;
 			d.event = M_INPUT_PRESSING;
@@ -123,7 +122,7 @@ int main(void) {
 		    if(event.button.button == SDL_BUTTON_LEFT &&
 			prsed)
 		    {
-			printf("up\n");
+			//printf("up\n");
 			prsed = 0;
 			MInputData d;
 			d.event = M_INPUT_CLICK;

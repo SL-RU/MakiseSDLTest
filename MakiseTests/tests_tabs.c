@@ -152,7 +152,7 @@ void tests_tabs_init(MHost *h)
 		    mp_anc(0,0,60,30,MPositionAnchor_LeftDown),
 		    "Back",
 		    &back_click, 0, 0, &ts_button);
-    m_create_button(&nextback_b[2], h->host,
+    m_create_button(&nextback_b[1], h->host,
 		    mp_anc(60,0,60,30,MPositionAnchor_LeftDown),
 		    "Next",
 		    &next_click, 0, 0, &ts_button);

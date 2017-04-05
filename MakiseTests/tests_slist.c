@@ -31,7 +31,12 @@ static MSList_Item sample_2[] = {
     {"Cup butter"},
     {"Flour"}
 };
-
+static MSList_Item sample_3[40] = {};
+static char *sample_words[] ={
+    "tiger", "lion", "elephant", "zebra", "horse", 
+    "camel", "deer", "crocodile", "rabbit", "cat"  };
+static sample_3_i = 0; //index 
+static sample_3_w = 0; //word index
 
 //event when button was clicked
 static void l_click(MSList *l, MSList_Item *selected)
@@ -43,12 +48,31 @@ static void l_select(MSList *l, MSList_Item *selected)
 {
     sprintf(status_buf, "Selected %s", selected->text);
 }
-static void b_type(MButton *b)
+static MSList_Item *lst;
+static void add(MSList_Item * it, char* c)
 {
-    //list.type = (list.type + 1) % 3;
+    it->prev = 0;
+    it->next = 0;
+    it->text = c;
+
+    m_slist_add(&list[3], it);
 }
 
-void tests_slist_init(MHost *h)
+static void b_add(MButton *b)
+{
+    if(sample_3_i > 38)
+	return;
+    add(&sample_3[sample_3_i + 1], sample_words[sample_3_w]);
+    sample_3_w = (sample_3_w + 1) % 10;
+    sample_3_i ++;
+}
+static void b_remove(MButton *b)
+{
+    if(list[3].selected != 0)
+	m_slist_remove(&list[3], list[3].selected);
+}
+
+void tests_slist_init(MHost *h) 
 {
     m_create_tabs(&tabs, h->host, mp_sall(0,0,0,30),
 		  tabs_t, 4, MTabs_Type_Up, 20, &ts_tabs);
@@ -89,12 +113,30 @@ void tests_slist_init(MHost *h)
     {
 	//Simple list
 	m_create_slist(&list[3], &tabs_t[3].cont,
-		       mp_sall(0,0,0,0), //position
+		       mp_sall(0,0,0,30), //position
 		       "You can add or delete items:", //header
 		       &l_select, &l_click, //events
 		       MSList_List,
 		       &ts_canvas, &ts_button);
-	m_slist_set_array(&list[3], tests_items, tests_items_len);
+	
+	sample_3->next = 0;
+	sample_3->prev = 0;
+	sample_3->text = "animals";
+	lst = sample_3;
+	
+	m_slist_set_list(&list[3], sample_3);
+	
+	m_create_button(&butt[0], &tabs_t[3].cont,
+			mp_anc(0, 0, 70, 30, MPositionAnchor_LeftDown),
+			"Add", 
+			&b_add, 0, 0,
+			&ts_button); 
+	m_create_button(&butt[1], &tabs_t[3].cont,
+			mp_anc(70, 0, 100, 30, MPositionAnchor_LeftDown),
+			"Remove", 
+			&b_remove, 0, 0,
+			&ts_button); 
+
     }
 
 //    makise_g_focus(&list.el, M_G_FOCUS_GET);
