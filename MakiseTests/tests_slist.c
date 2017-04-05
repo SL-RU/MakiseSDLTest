@@ -14,8 +14,6 @@ static MSList list[4];
 static MLable labl[1];
 static MButton butt[4];
 
-static MCanvas canv[1];
-
 static MSList_Item sample_1[] = {
     {"No proxy"},
     {"Auto-detect proxy settings"},
@@ -35,8 +33,8 @@ static MSList_Item sample_3[40] = {};
 static char *sample_words[] ={
     "tiger", "lion", "elephant", "zebra", "horse", 
     "camel", "deer", "crocodile", "rabbit", "cat"  };
-static sample_3_i = 0; //index 
-static sample_3_w = 0; //word index
+static uint32_t sample_3_i = 0; //index 
+static uint32_t sample_3_w = 0; //word index
 
 //event when button was clicked
 static void l_click(MSList *l, MSList_Item *selected)
