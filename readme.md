@@ -4,10 +4,10 @@ https://github.com/SL-RU/MakiseGUI
 
 MakiseGUI - graphical library for embed applications. It's fully written on C and can be ported anywhere. This test uses SDL2 as frontback.
 
-#Requirements
-*SDL2
+# Requirements
+* SDL2
 
-#Build
+# Build
 
 ```
 git clone https://github.com/SL-RU/MakiseSDLTest
@@ -19,11 +19,11 @@ cmake ..
 make
 ```
 
-#Info
+# Info
 
 Tests located in MakiseTests. For each test - own source file. Almost everything is commented
 
-#Controls
+# Controls
 
 Keyboard:
 * Arrows - arrows
