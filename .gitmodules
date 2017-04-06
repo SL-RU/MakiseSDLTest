@@ -1,3 +1,6 @@
 [submodule "MakiseGUI"]
 	path = MakiseGUI
 	url = https://github.com/SL-RU/MakiseGUI
+[submodule "MakiseTests"]
+	path = MakiseTests
+	url = https://github.com/SL-RU/MakiseTests.git
