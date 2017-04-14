@@ -4,7 +4,7 @@ enable_language(C)
 project(MakiseSDL C)
 
 #USER CUSTOM SETTINGS
-set(OPT "-O0")
+set(OPT "-Ofast")
 set(USER_LINKER_FLAGS "-u _printf_float")
 set(USER_CFLAGS "")
 

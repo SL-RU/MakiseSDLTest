@@ -26,6 +26,12 @@ int x = 0;
 int y = 0;
 char bu[100] = {0};
 
+//Define user keys
+#define M_KEY_USER_ESC        M_KEY_USER_0
+#define M_KEY_USER_FOCUS_NEXT M_KEY_USER_0+1
+#define M_KEY_USER_FOCUS_PREV M_KEY_USER_0+2
+#define M_KEY_USER_TREE       M_KEY_USER_0+3
+
 //input result handler. That will be called by gui thread after recieving result from input
 MInputData inp_handler(MInputData d, MInputResultEnum res)
 {
@@ -46,7 +52,14 @@ MInputData inp_handler(MInputData d, MInputResultEnum res)
 	    makise_g_host_focus_next(host);
 	if(d.key == M_KEY_TAB_BACK)
 	    makise_g_host_focus_prev(host);		    
-
+	if(d.key == M_KEY_USER_ESC)
+	    tests_exit();
+	if(d.key == M_KEY_USER_FOCUS_NEXT)
+	    makise_g_host_focus_next(host);
+	if(d.key == M_KEY_USER_FOCUS_PREV)
+	    makise_g_host_focus_prev(host);
+	if(d.key == M_KEY_USER_TREE)
+	    makise_g_print_tree(host);
     }
     return (MInputData){0};
 }
@@ -173,21 +186,30 @@ int main(void) {
 						     M_KEY_OK,
 						     M_INPUT_CLICK, 100);
 			break;
+
+			//DO NOT Interact with gui directly. It may cause errors in multithread applications. Use custom events
 		    case SDLK_DELETE:
-			makise_g_print_tree(host);
+			makise_gui_input_send_button(host,
+						     M_KEY_USER_TREE,
+						     M_INPUT_CLICK, 100);
+
 			break;
 		    case SDLK_ESCAPE:
-			//SDL_DestroyRenderer(renderer);
-			//SDL_DestroyWindow(window);
-			//SDL_Quit();
-			tests_exit();
+			makise_gui_input_send_button(host,
+						     M_KEY_USER_ESC,
+						     M_INPUT_CLICK, 100);
 
 			break;
 		    case SDLK_EQUALS:
-			makise_g_host_focus_next(host);
+			makise_gui_input_send_button(host,
+						     M_KEY_USER_FOCUS_NEXT,
+						     M_INPUT_CLICK, 100);
+
 			break;
 		    case SDLK_MINUS:
-			makise_g_host_focus_prev(host);
+			makise_gui_input_send_button(host,
+						     M_KEY_USER_FOCUS_PREV,
+						     M_INPUT_CLICK, 100);
 			break;
 		    }
 		    
@@ -210,6 +232,7 @@ void start_m()
     host->host = &co;
     host->host->gui = gu;
     makise_gui_init(host); //init gui host
+    //if input event wasn't handled by gui. We need to handle it
     host->input.result_handler = &inp_handler;
 
     ma_g_hpo = mp_rel(0,0,320,240);
