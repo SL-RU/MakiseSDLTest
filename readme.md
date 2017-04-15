@@ -4,6 +4,8 @@ https://github.com/SL-RU/MakiseGUI
 
 MakiseGUI - graphical library for embed applications. It's fully written on C and can be ported anywhere. This test uses SDL2 as frontback.
 
+Video: https://www.youtube.com/watch?v=OX_bcBR7teA
+
 # Requirements
 * SDL2
 
