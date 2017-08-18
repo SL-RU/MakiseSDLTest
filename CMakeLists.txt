@@ -64,7 +64,7 @@ foreach(def ${PRJ_DEFS})
 endforeach()
 
 #setup flags
-set(CMAKE_C_FLAGS "${PRJ_CFLAGS} ${OPT} -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -std=c99 ${USER_CFLAGS} ${CMAKE_C_FLAGS}")
+set(CMAKE_C_FLAGS "${PRJ_CFLAGS} ${OPT} -Wall -fdata-sections -ffunction-sections -g -gdwarf-2 -std=gnu99 ${USER_CFLAGS} ${CMAKE_C_FLAGS}")
 set(LINKER_FLAGS "${USER_LINKER_FLAGS} ${LINKER_FLAGS} -lm -lc")
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${LINKER_FLAGS}")
 

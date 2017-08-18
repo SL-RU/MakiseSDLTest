@@ -1,5 +1,6 @@
 #ifndef MAKISE_CONFIG_H
 #define MAKISE_CONFIG_H
+#include <stdio.h>
 
 #define MAKISE_DEBUG_OUTPUT printf
 
@@ -23,6 +24,7 @@
 #define MAKISE_GUI_INPUT_POINTER_ENABLE 1
 
 
+
 //Select used elements
 #define MAKISE_E_SLIST             1
 #define MAKISE_E_BUTTONS           1
@@ -33,6 +35,9 @@
 #define MAKISE_E_TABS              1
 #define MAKISE_E_TEXT_FIELD        1
 #define MAKISE_E_TOGGLE            1
+#define MAKISE_E_FSVIEWER          1
+#define MAKISE_UNICODE             1
+#define MAKISE_DISPLAY_INVERTED    0
 
 
 #ifdef MAKISE_ILI9340_USE
