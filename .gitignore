@@ -108,3 +108,7 @@ Mkfile.old
 dkms.conf
 
 project.el
+
+GPATH
+GRTAGS
+GTAGS

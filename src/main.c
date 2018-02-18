@@ -81,8 +81,8 @@ int main(void) {
     
     while (1) {
 	//draw & predraw gui
-	makise_g_host_call(host, M_G_CALL_PREDRAW);
-	makise_g_host_call(host, M_G_CALL_DRAW);
+	makise_g_host_call(host, mGui, M_G_CALL_PREDRAW);
+	makise_g_host_call(host, mGui, M_G_CALL_DRAW);
 
 	//call driver
 	makise_sdl2_draw(mGui);
@@ -230,7 +230,6 @@ void start_m()
     MakiseDriver * dr = &Dr;
     host = &hs;
     host->host = &co;
-    host->host->gui = gu;
     makise_gui_init(host); //init gui host
     //if input event wasn't handled by gui. We need to handle it
     host->input.result_handler = &inp_handler;
@@ -247,7 +246,7 @@ void start_m()
     uint32_t sz = makise_init(gu, dr, bu);
     bu->buffer = bufff;
     memset(bu->buffer, 0, sz);
-    //printf("%d\n", (uint32_t)(sz));
+    printf("%d\n", (uint32_t)(sz));
 
     
     mGui = gu;
