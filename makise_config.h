@@ -60,6 +60,12 @@
 /* uint8_t m_mutex_release_grant (MAKISE_MUTEX_t *sobj); */
 #endif
 
+// FONTS. Uncomment to use
+#define MAKISE_FONTS_DEFAULT10X20
+#define MAKISE_FONTS_DEFAULT8X13
+#define MAKISE_FONTS_DEFAULT6X10
+#define MAKISE_FONTS_DEFAULT5X7
+
 
 #ifdef MAKISE_ILI9340_USE
 #include "ili9340.h"

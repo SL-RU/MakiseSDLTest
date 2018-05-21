@@ -222,39 +222,28 @@ int main(void) {
     }
 }
 
-MPosition ma_g_hpo;
+static uint32_t* _get_gui_buffer(uint32_t size)
+{
+    return bufff;
+}
+
 void start_m()
 {
     MakiseGUI    * gu = &Gu;
-    MakiseBuffer * bu = &Bu;
     MakiseDriver * dr = &Dr;
     host = &hs;
-    host->host = &co;
-    makise_gui_init(host); //init gui host
-    //if input event wasn't handled by gui. We need to handle it
-    host->input.result_handler = &inp_handler;
+    
 
-    ma_g_hpo = mp_rel(0,0,320,240);
-    ma_g_hpo.real_x = 0;
-    ma_g_hpo.real_y = 0;
-    host->host->position = &ma_g_hpo;
-    
-    
     //init driver structure
     makise_sdl2_driver(dr, 320, 240, screen);
-    
-    uint32_t sz = makise_init(gu, dr, bu);
-    bu->buffer = bufff;
-    memset(bu->buffer, 0, sz);
-    printf("%d\n", (uint32_t)(sz));
 
+    makise_gui_autoinit(host,
+			gu, dr,
+			&_get_gui_buffer,
+			&inp_handler,
+			0, 0, 0);
     
     mGui = gu;
-    makise_start(gu);
-
-    mGui->predraw = 0; //we don't need driver to execute those methods
-    mGui->draw = 0; //we'll execute them by ourself in loop. It required when app is multitheading or uses interrupts
-
     
     //run tests
     tests_init(host);
