@@ -222,7 +222,7 @@ int main(void) {
     }
 }
 
-static uint32_t* _get_gui_buffer(uint32_t size)
+static void* _get_gui_buffer(uint32_t size)
 {
     return bufff;
 }
@@ -241,7 +241,10 @@ void start_m()
 			gu, dr,
 			&_get_gui_buffer,
 			&inp_handler,
-			0, 0, 0);
+			0, 0, 0,
+                        0, // draw primitives
+                        0  // draw text
+        );
     
     mGui = gu;
     
